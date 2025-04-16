@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import taskRoutes from "./routes/task.route.js";
 import memberRoutes from "./routes/member.route.js";
+import assignmentRoutes from './routes/assignment.route.js'
 import errorHandler from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -13,6 +14,7 @@ app.use(express.json());
 // routes
 app.use("/api/v1/tasks", taskRoutes);
 app.use("/api/v1/members", memberRoutes);
+app.use("/api/v1/assignment", assignmentRoutes);
 
 // global error handler
 app.use(errorHandler);
