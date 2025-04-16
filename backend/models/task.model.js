@@ -43,6 +43,9 @@ const taskSchema = new mongoose.Schema(
     startDate: {
       type: Date,
     },
+    endDate: {
+      type: Date,
+    },
   },
   {
     timestamps: true, // createdAt, updatedAt
