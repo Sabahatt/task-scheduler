@@ -1,8 +1,8 @@
-import Env from "../envs/env";
+import Env from "@/envs/env";
 
 export default {
   BASE_URL: Env.BASE_URL,
-  API_URL: `${Env.BASE_URL}/api/v1/`,
+  API_URL: `${Env.BASE_URL}api/v1/`,
 
   TASKS: "tasks",
   MEMBERS: "members",

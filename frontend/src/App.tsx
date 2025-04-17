@@ -1,14 +1,17 @@
 import "./App.css";
-import AppRoutes from "./routes/AppRoutes";
-import NavBar from "./ui/components/NavBar";
+import AppRoutes from "@/routes/AppRoutes";
+import NavBar from "@/ui/components/NavBar";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-const App = () =>  {
+const App = () => {
   return (
-    <div>
-      <NavBar/>
-      <AppRoutes />;
-    </div>
+    <Router>
+      <NavBar />
+      <AppRoutes />
+      <ToastContainer position="top-right" />
+    </Router>
   );
-}
+};
 
 export default App;

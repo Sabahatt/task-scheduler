@@ -1,7 +1,22 @@
+// {
+//   "files": [],
+//   "references": [
+//     { "path": "./tsconfig.app.json" },
+//     { "path": "./tsconfig.node.json" }
+//   ],
+// }
+
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",   // For React (JSX)
+    "baseUrl": ".",  
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["./src/*"]  
+    },
+    "lib": ["esnext", "dom"],
+    "types": [],
+    "moduleResolution": "bundler",
+    "module": "Preserve",
+  },
 }

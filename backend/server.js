@@ -6,10 +6,12 @@ import memberRoutes from "./routes/member.route.js";
 import assignmentRoutes from './routes/assignment.route.js'
 import dashboardRoutes from './routes/dashboard.route.js'
 import errorHandler from "./middlewares/errorHandler.js";
+import cors from "cors"
 
 dotenv.config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 // routes
