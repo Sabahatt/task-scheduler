@@ -3,9 +3,18 @@ import Task from "../models/task.model.js";
 
 export const getAllMembers = async (req, res) => {
   const members = await Member.find();
+  const membersWithTaskCount = await Promise.all(
+    members.map(async (member) => {
+      const taskCount = await Task.countDocuments({ assignedTo: member._id });
+      return {
+        ...member.toObject(),
+        taskCount,
+      };
+    })
+  );
   res
     .status(200)
-    .json({ success: true, message: "Members retrieved", data: members });
+    .json({ success: true, message: "Members retrieved", data: membersWithTaskCount });
 };
 
 export const getMemberById = async (req, res) => {

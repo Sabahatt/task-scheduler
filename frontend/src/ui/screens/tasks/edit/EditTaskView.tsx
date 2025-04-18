@@ -16,6 +16,7 @@ const EditTaskView: FC<Props> = ({ loading, taskData, onSubmit }) => {
         onSubmit={onSubmit}
         defaultValues={taskData}
         loading={loading}
+        isEditMode={true}
       />
     </div>
   );

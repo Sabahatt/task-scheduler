@@ -5,5 +5,6 @@ export interface IMember {
     availableHours: number;
     createdAt: string;
     updatedAt: string;
+    taskCount?: number
   }
   

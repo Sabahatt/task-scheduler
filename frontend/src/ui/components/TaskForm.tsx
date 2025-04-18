@@ -14,6 +14,7 @@ type Props = {
   onSubmit: (form: TaskFormValues) => void;
   defaultValues?: Partial<TaskFormValues>;
   loading?: boolean;
+  isEditMode?: boolean;
 };
 
 export type TaskFormValues = {
@@ -22,7 +23,7 @@ export type TaskFormValues = {
   priority: "Low" | "Medium" | "High";
   estimatedHours: number;
   deadline: string; // ISO string
-//   status: "Pending" | "In Progress" | "Completed";
+  //   status: "Pending" | "In Progress" | "Completed";
 };
 
 const priorities = ["Low", "Medium", "High"] as const;
@@ -60,18 +61,23 @@ const schema: yup.ObjectSchema<TaskFormValues> = yup.object({
       if (!value) return false;
       return new Date(value) >= new Date(); // Ensure the deadline is not in the past
     }),
-//   status: yup
-//     .mixed<TaskFormValues["status"]>()
-//     .oneOf(statuses)
-//     .required("Status is required"),
+  //   status: yup
+  //     .mixed<TaskFormValues["status"]>()
+  //     .oneOf(statuses)
+  //     .required("Status is required"),
 });
 
-const TaskForm = ({ onSubmit, defaultValues = {}, loading }: Props) => {
+const TaskForm = ({
+  onSubmit,
+  defaultValues = {},
+  loading,
+  isEditMode,
+}: Props) => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<TaskFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -80,22 +86,23 @@ const TaskForm = ({ onSubmit, defaultValues = {}, loading }: Props) => {
       priority: "Medium",
       estimatedHours: 1,
       deadline: "",
-    //   status: "Pending",
+      //   status: "Pending",
       ...defaultValues,
     },
   });
   const today = new Date().toISOString().split("T")[0];
+
   useEffect(() => {
-    if (defaultValues) {
+    if (isEditMode) {
       const parsed = {
         ...defaultValues,
         deadline: defaultValues.deadline?.split("T")[0],
-        // startDate: defaultValues.startDate?.split("T")[0],
-        // endDate: defaultValues.endDate?.split("T")[0],
       };
       reset(parsed);
     }
-  }, [defaultValues, reset]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditMode, defaultValues]);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <Box display="flex" flexDirection="column" gap={3}>
@@ -159,7 +166,7 @@ const TaskForm = ({ onSubmit, defaultValues = {}, loading }: Props) => {
               InputLabelProps={{ shrink: true }}
               error={!!errors.deadline}
               helperText={errors.deadline?.message}
-              InputProps={{ inputProps: { min: today } }} 
+              InputProps={{ inputProps: { min: today } }}
               required
             />
           )}
