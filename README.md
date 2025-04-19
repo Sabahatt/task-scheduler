@@ -67,12 +67,6 @@ When assigning a task, the system:
 
 ---
 
-## Reflections and Challenges Faced
-
-This project helped me quickly get hands-on with MongoDB, which was new to me and one of the key challenges I encountered. Another challenge was managing time effectively between backend logic and frontend polish — in hindsight, a more strategic split of focus would have allowed deeper refinement of the core task allocation and capacity management logic. Despite that, the project was a valuable learning experience that strengthened my understanding of real-time workload distribution and scalable task assignment systems.
-
----
-
 ##  API Endpoints
 
 ### Tasks
@@ -99,4 +93,9 @@ This project helped me quickly get hands-on with MongoDB, which was new to me an
 - `GET /summary`  
   → Returns summary of task stats with their details
 
+---
+
+## Reflections and Challenges Faced
+
+This project helped me quickly get hands-on with MongoDB, which was new to me and one of the key challenges I encountered. Another challenge was managing time effectively between backend logic and frontend polish — in hindsight, a more strategic split of focus would have allowed deeper refinement of the core task allocation and capacity management logic. Despite that, the project was a valuable learning experience that strengthened my understanding of real-time workload distribution and scalable task assignment systems.
 
