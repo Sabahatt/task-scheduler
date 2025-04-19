@@ -51,7 +51,7 @@ When assigning a task, the system:
 
 ### Planning Process
 
-![Screenshot](screenshots\project_planning.png)
+![Screenshot](screenshots/project_planning.png)
 
 
 ---
@@ -59,11 +59,11 @@ When assigning a task, the system:
 ## Project Screenshots
 
 ### Dashboard
-![Screenshot](screenshots\dashboard.png)
+![Screenshot](screenshots/dashboard.png)
 ### Timeline
-![Screenshot](screenshots\timeline.png)
+![Screenshot](screenshots/timeline.png)
 ### Assignment 
-![Screenshot](screenshots\assignment.png)
+![Screenshot](screenshots/assignment.png)
 
 ---
 
