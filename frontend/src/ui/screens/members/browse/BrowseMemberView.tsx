@@ -22,7 +22,7 @@ const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete
     {
       field: "memberName",
       headerName: "Member",
-      width: 250,
+      width: 330,
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
@@ -37,21 +37,21 @@ const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete
     {
       field: "availableHours",
       headerName: "Available Hours",
-      width: 200,
+      width: 330,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "taskCount",
       headerName: "Tasks Assigned",
-      width: 200,
+      width: 330,
       align: "center",
       headerAlign: "center",
     },
     {
       field: "actions",
       headerName: "Actions",
-      width: 300,
+      width: 330,
       sortable: false,
       filterable: false,
       headerAlign: "center",
