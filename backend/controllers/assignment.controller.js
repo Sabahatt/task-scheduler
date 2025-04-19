@@ -87,3 +87,26 @@ export const getMemberSuggestions = async (req, res) => {
     data: availableMembers
   });
 };
+
+
+export const unassignMemberFromTask = async (req, res) => {
+  const { taskId } = req.body;
+  const task = await Task.findById(taskId);
+
+  if (!task) {
+    return res.status(404).json({ success: false, message: 'Task not found' });
+  }
+
+  if (!task.assignedTo) {
+    return res.status(400).json({ success: false, message: 'Task is not assigned to anyone' });
+  }
+
+  task.assignedTo = undefined;
+  await task.save();
+
+  res.status(200).json({
+    success: true,
+    message: 'Task unassigned successfully',
+    data: task,
+  });
+}

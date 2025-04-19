@@ -7,7 +7,7 @@ export interface ITask {
   priority: "Low" | "Medium" | "High";
   estimatedHours: number;
   deadline: string;
-  status: "Pending" | "In Progress" | "Completed"; 
+  status: ""| "Pending" | "In Progress" | "Completed"; 
   createdAt: string;
   updatedAt: string;
   startDate?: string;

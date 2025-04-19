@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import BrowseTaskView from "./BrowseTaskView";
-import { deleteTask, getAllTasks } from "@/services/TaskService";
+import { deleteTask, getAllTasks, unassignTask } from "@/services/TaskService";
 import { ITask } from "@/models/types/Task";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ const BrowseTaskController = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<ITask[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [open, setOpen] = useState(false);
 
   const fetchTasks = async () => {
     setLoading(true);
@@ -37,12 +38,30 @@ const BrowseTaskController = () => {
     }
   };
 
+  const handleUnassign = async (id: string) => {
+    setLoading(true);
+    try {
+      await unassignTask(id);
+      toast.success("Unassigned successfully");
+      fetchTasks();
+    } catch (error) {
+      toast.error("Failed to unassign");
+      console.error("Failed to unassign", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleCreateTask = () => {
     navigate("/tasks/add");
   };
 
   const handleEditTask = (id: string) => {
     navigate(`/task/edit/${id}`);
+  };
+
+  const handleViewDetail = (id: string) => {
+    navigate(`/tasks/${id}`);
   };
 
   const rows = tasks.map((task) => ({
@@ -61,6 +80,10 @@ const BrowseTaskController = () => {
       handleDelete={handleDelete}
       handleCreate={handleCreateTask}
       handleEdit={handleEditTask}
+      handleViewDetail={handleViewDetail}
+      open={open}
+      setOpen={setOpen}
+      handleUnassign={handleUnassign}
     />
   );
 };

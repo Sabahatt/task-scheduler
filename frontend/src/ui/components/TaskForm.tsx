@@ -35,7 +35,7 @@ const schema: yup.ObjectSchema<TaskFormValues> = yup.object({
     .string()
     .required("Title is required")
     .min(5, "Title must be at least 10 characters")
-    .max(50, "Title must be at most 50 characters"),
+    .max(100, "Title must be at most 100 characters"),
   description: yup.string().max(1000, "Max 1000 characters").optional(),
   priority: yup
     .mixed<TaskFormValues["priority"]>()

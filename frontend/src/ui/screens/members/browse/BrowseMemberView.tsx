@@ -14,9 +14,10 @@ type Props = {
   handleDelete: (id: string) => void
   handleCreate: () => void
   handleEdit: (id: string) => void
+  handleViewDetail: (id: string) => void
 };
 
-const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete, handleEdit }) => {
+const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete, handleEdit, handleViewDetail }) => {
   const columns: GridColDef[] = [
     {
       field: "memberName",
@@ -24,6 +25,14 @@ const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete
       width: 250,
       align: "center",
       headerAlign: "center",
+      renderCell: (params) => (
+        <span
+          className="text-blue-600 underline cursor-pointer hover:text-blue-800 transition-colors"
+          onClick={() => handleViewDetail(params.row.id)}
+        >
+          {params.value}
+        </span>
+      )
     },
     {
       field: "availableHours",
@@ -59,7 +68,6 @@ const BrowseMemberView: FC<Props> = ({ loading, rows, handleCreate, handleDelete
           <Button
             variant="contained"
             size="small"
-            // onClick={() => navigate(`/tasks/edit/${params.row.id}`)}
             onClick={() => handleEdit(params.row.id)}
           >
             Edit

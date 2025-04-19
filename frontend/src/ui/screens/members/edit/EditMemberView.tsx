@@ -12,7 +12,7 @@ const EditMemberView: FC<Props> = ({ loading, memberData, onSubmit }) => {
     // console.log('first', memberData)
   return (
     <div className="container">
-      <ScreenHeader title="Edit Task" />
+      <ScreenHeader title="Edit Member" />
       <MemberForm
         onSubmit={onSubmit}
         defaultValues={memberData}

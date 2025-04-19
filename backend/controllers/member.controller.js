@@ -2,19 +2,51 @@ import Member from "../models/member.model.js";
 import Task from "../models/task.model.js";
 
 export const getAllMembers = async (req, res) => {
+  // const members = await Member.find();
+  
+  // const membersWithTaskCount = await Promise.all(
+  //   members.map(async (member) => {
+  //     const taskCount = await Task.countDocuments({ assignedTo: member._id });
+  //     return {
+  //       ...member.toObject(),
+  //       taskCount,
+  //     };
+  //   })
+  // );
+  // res
+  //   .status(200)
+  //   .json({ success: true, message: "Members retrieved", data: membersWithTaskCount });
   const members = await Member.find();
-  const membersWithTaskCount = await Promise.all(
-    members.map(async (member) => {
-      const taskCount = await Task.countDocuments({ assignedTo: member._id });
-      return {
-        ...member.toObject(),
-        taskCount,
-      };
-    })
-  );
-  res
-    .status(200)
-    .json({ success: true, message: "Members retrieved", data: membersWithTaskCount });
+
+    const membersWithData = await Promise.all(
+      members.map(async (member) => {
+        const tasks = await Task.find({
+          assignedTo: member._id,
+          status: { $ne: "Completed" }
+        });
+
+        const taskCount = tasks.length;
+        const totalAssignedHours = tasks.reduce(
+          (sum, task) => sum + task.estimatedHours,
+          0
+        );
+
+        const isOverloaded = totalAssignedHours > member.availableHours;
+
+        return {
+          ...member.toObject(),
+          taskCount,
+          assignedTasks: tasks,
+          isOverloaded
+        };
+      })
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Members retrieved",
+      data: membersWithData
+    });
 };
 
 export const getMemberById = async (req, res) => {

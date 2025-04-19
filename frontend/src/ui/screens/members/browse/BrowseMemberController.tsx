@@ -37,14 +37,16 @@ const BrowseMemberController = () => {
     }
   };
 
-  // console.log('sldfkn', members)
-
   const handleCreateTask = () => {
     navigate("/members/add");
   };
 
   const handleEditTask = (id: string) => {
     navigate(`/members/edit/${id}`);
+  };
+
+  const handleViewDetail = (id: string) => {
+    navigate(`/members/${id}`);
   };
 
   const rows = members.map((member) => ({
@@ -63,6 +65,7 @@ const BrowseMemberController = () => {
       handleDelete={handleDelete}
       handleCreate={handleCreateTask}
       handleEdit={handleEditTask}
+      handleViewDetail={handleViewDetail}
     />
   );
 };

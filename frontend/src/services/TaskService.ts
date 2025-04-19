@@ -23,3 +23,16 @@ export const deleteTask = (id: string) => {
   return axiosInstance.delete<ApiResponse<null>>(`${Api.TASKS}/${id}`);
 };
 
+export const assignTask = (taskId: string, memberId: string, forceAssign = false) => {
+  return axiosInstance.post<ApiResponse<ITask>>(`${Api.ASSIGNMENT}`, {
+    taskId,
+    memberId,
+    forceAssign,
+  });
+};
+
+export const unassignTask = (taskId: string) => {
+  return axiosInstance.post<ApiResponse<ITask>>(`${Api.ASSIGNMENT}/${Api.UNASSIGN}`, {
+    taskId,
+  });
+};

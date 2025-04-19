@@ -7,6 +7,7 @@ export default {
   TASKS: "tasks",
   MEMBERS: "members",
   ASSIGNMENT: "assignment",
+  UNASSIGN: "unassign",
   SUGGESTIONS: "suggestions",
   DASHBOARD: "summary",
 };

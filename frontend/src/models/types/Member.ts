@@ -1,3 +1,4 @@
+import { ITask } from "./Task";
 
 export interface IMember {
     _id: string;
@@ -5,6 +6,9 @@ export interface IMember {
     availableHours: number;
     createdAt: string;
     updatedAt: string;
-    taskCount?: number
+    taskCount?: number;
+    assignedTasks?: ITask[];
+    totalAssignedHours?: number
+    isOverloaded?: boolean
   }
   

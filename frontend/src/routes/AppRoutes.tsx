@@ -6,6 +6,8 @@ import AddTaskController from "@/ui/screens/tasks/create/CreateTaskController";
 import EditTaskController from "@/ui/screens/tasks/edit/EditTaskController";
 import CreateMemberController from "@/ui/screens/members/create/CreateMemberController";
 import EditMemberController from "@/ui/screens/members/edit/EditMemberController";
+import DetailMemberController from "@/ui/screens/members/detail/DetailMemberController";
+import DetailTaskController from "@/ui/screens/tasks/detail/DetailTaskController";
 
 const AppRoutes = () => {
   return (
@@ -17,6 +19,8 @@ const AppRoutes = () => {
       <Route path="/members" element={<BrowseMemberController />} />
       <Route path="/members/add" element={<CreateMemberController />} />
       <Route path="/members/edit/:id" element={<EditMemberController />} />
+      <Route path="/members/:id" element={<DetailMemberController />} />
+      <Route path="/tasks/:id" element={<DetailTaskController />} />
     </Routes>
   );
 };
