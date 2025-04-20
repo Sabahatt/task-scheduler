@@ -9,7 +9,7 @@ This was implemented using **MongoDB** for storing tasks and members, **Express.
 ## Setup Instructions
 
 - Clone the repository
-    - git clone https://github.com/your-username/task-scheduler.git
+    - git clone https://github.com/Sabahatt/task-scheduler.git
     - cd task-scheduler
 
 - Set up .env file
