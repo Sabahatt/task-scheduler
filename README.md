@@ -12,6 +12,10 @@ This was implemented using **MongoDB** for storing tasks and members, **Express.
     - git clone https://github.com/your-username/task-scheduler.git
     - cd task-scheduler
 
+- Set up .env file
+    - cp .env.example .env
+    - Open the .env file and replace the placeholder values with your own MongoDB URI
+
 - Backend
     - npm install
     - npm run dev
