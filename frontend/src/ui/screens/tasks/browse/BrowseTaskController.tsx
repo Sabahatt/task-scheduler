@@ -10,6 +10,7 @@ const BrowseTaskController = () => {
   const [tasks, setTasks] = useState<ITask[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [open, setOpen] = useState(false);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   const fetchTasks = async () => {
     setLoading(true);
@@ -64,6 +65,16 @@ const BrowseTaskController = () => {
     navigate(`/tasks/${id}`);
   };
 
+  const handleOpenModal = (taskId) => {
+    setSelectedTaskId(taskId);
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+    setSelectedTaskId(null);
+  };
+
   const rows = tasks.map((task) => ({
     id: task._id,
     ...task,
@@ -71,7 +82,7 @@ const BrowseTaskController = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [open]);
 
   return (
     <BrowseTaskView
@@ -84,6 +95,9 @@ const BrowseTaskController = () => {
       open={open}
       setOpen={setOpen}
       handleUnassign={handleUnassign}
+      selectedTaskId={selectedTaskId}
+      handleCloseModal={handleCloseModal}
+      handleOpenModal={handleOpenModal}
     />
   );
 };

@@ -12,39 +12,44 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { getAllMembers, getSuggestedMembers } from "@/services/MemberService";
 import { assignTask } from "@/services/TaskService";
 import { ISuggestions } from "@/models/types/Suggestions";
 import { IMember } from "@/models/types/Member";
+import { toast } from "react-toastify";
 
 interface AssignModalProps {
   open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   taskId: string;
   onClose: () => void;
 }
 
-const AssignModal: FC<AssignModalProps> = ({ open, taskId, onClose }) => {
+const AssignModal: FC<AssignModalProps> = ({
+  open,
+  taskId,
+  onClose,
+  setOpen,
+}) => {
   const [allMembers, setAllMembers] = useState<IMember[]>([]);
   const [suggestedMembers, setSuggestedMembers] = useState<ISuggestions[]>([]);
   const [loading, setLoading] = useState(true);
   const [assigning, setAssigning] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [warningData, setWarningData] = useState(null);
-  const [assignSuccess, setAssignSuccess] = useState<string | null>(null);
 
   useEffect(() => {
     if (open) {
       fetchData();
       resetState();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const resetState = () => {
     setShowWarning(false);
     setWarningData(null);
-    setAssignSuccess(null);
   };
 
   const fetchData = async () => {
@@ -75,8 +80,8 @@ const AssignModal: FC<AssignModalProps> = ({ open, taskId, onClose }) => {
         return;
       }
 
-      setAssignSuccess(message);
-      fetchData(); // refresh list after assignment
+      toast.success(message);
+      setOpen(false);
     } catch (err) {
       console.error("Assignment failed", err);
       alert("Failed to assign task.");
@@ -194,11 +199,11 @@ const AssignModal: FC<AssignModalProps> = ({ open, taskId, onClose }) => {
         )}
 
         {/* Success Message */}
-        {assignSuccess && (
+        {/* {assignSuccess && (
           <Alert severity="success" className="mt-4">
             {assignSuccess}
           </Alert>
-        )}
+        )} */}
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} disabled={assigning}>

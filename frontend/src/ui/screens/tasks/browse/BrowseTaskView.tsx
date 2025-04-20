@@ -16,7 +16,10 @@ type Props = {
   handleViewDetail: (id: string) => void;
   setOpen: Dispatch<SetStateAction<boolean>>;
   open: boolean;
-  handleUnassign: (id: string) => void
+  selectedTaskId: string;
+  handleUnassign: (id: string) => void;
+  handleOpenModal: (id: string) => void;
+  handleCloseModal: () => void;
 };
 
 const BrowseTaskView: FC<Props> = ({
@@ -28,7 +31,10 @@ const BrowseTaskView: FC<Props> = ({
   handleViewDetail,
   open,
   setOpen,
-  handleUnassign
+  handleUnassign,
+  selectedTaskId,
+  handleOpenModal,
+  handleCloseModal,
 }) => {
   const columns: GridColDef[] = [
     {
@@ -47,16 +53,6 @@ const BrowseTaskView: FC<Props> = ({
       ),
     },
     {
-      field: "deadline",
-      headerName: "Due Date",
-      width: 150,
-      valueGetter: (params) => {
-        return params ? new Date(params).toLocaleDateString() : "";
-      },
-      align: "center",
-      headerAlign: "center",
-    },
-    {
       field: "priority",
       headerName: "Priority",
       width: 150,
@@ -67,6 +63,16 @@ const BrowseTaskView: FC<Props> = ({
       field: "status",
       headerName: "Status",
       width: 150,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "deadline",
+      headerName: "Due Date",
+      width: 150,
+      valueGetter: (params) => {
+        return params ? new Date(params).toLocaleDateString() : "";
+      },
       align: "center",
       headerAlign: "center",
     },
@@ -133,16 +139,17 @@ const BrowseTaskView: FC<Props> = ({
                 variant="text"
                 size="small"
                 sx={{ minWidth: 80 }}
-                onClick={() => setOpen(true)} 
+                onClick={() => handleOpenModal(params.row.id)}
               >
                 Assign
               </Button>
             )}
-            {open && (
+            {selectedTaskId === params.row.id && open && (
               <AssignModal
                 open={open}
-                onClose={() => setOpen(false)}
-                taskId={params.row.id}
+                setOpen={setOpen}
+                onClose={handleCloseModal}
+                taskId={selectedTaskId}
               />
             )}
           </Box>
