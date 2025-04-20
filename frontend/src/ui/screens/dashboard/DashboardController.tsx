@@ -41,6 +41,10 @@ const DashboardController = () => {
     navigate(`/tasks/${params.row._id}`);
   };
 
+  const handleBtnClick = () => {
+    navigate("/tasks/add");
+  };
+
   return (
     <DashboardView
       data={data}
@@ -51,6 +55,7 @@ const DashboardController = () => {
       handleRowClick={handleRowClick}
       modalTitle={modalTitle}
       tasksToShow={tasksToShow}
+      handleBtnClick={handleBtnClick}
     />
   );
 };

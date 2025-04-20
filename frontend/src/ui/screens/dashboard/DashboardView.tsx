@@ -8,6 +8,7 @@ import {
   Container,
   Stack,
   CircularProgress,
+  Button,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import TaskIcon from "@mui/icons-material/Task";
@@ -28,6 +29,7 @@ type Props = {
   tasksToShow: ITask[];
   handleRowClick: (params) => void;
   openModal: (title: string, tasks: ITask[]) => void;
+  handleBtnClick: () => void
 };
 
 const priorityColorMap: Record<string, string> = {
@@ -45,6 +47,7 @@ const DashboardView: FC<Props> = ({
   tasksToShow,
   handleRowClick,
   openModal,
+  handleBtnClick
 }) => {
   if (loading || !data) {
     return (
@@ -125,10 +128,19 @@ const DashboardView: FC<Props> = ({
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h5" gutterBottom>
-        Task Summary
-      </Typography>
-
+      <div className="flex justify-between items-center mb-4">
+        <Typography variant="h5" gutterBottom>
+          Task Summary
+        </Typography>
+        <Button
+          variant="contained"
+          size="small"
+          color="primary"
+          onClick={handleBtnClick}
+        >
+          Create New Task
+        </Button>
+      </div>
       <Stack spacing={2} direction="row" flexWrap="wrap" useFlexGap>
         {statCards.map((card) => (
           <Card
@@ -143,7 +155,7 @@ const DashboardView: FC<Props> = ({
               "&:hover": {
                 boxShadow: 4,
               },
-              borderColor: 'lightGray'
+              borderColor: "lightGray",
             }}
           >
             <CardContent>
