@@ -1,6 +1,6 @@
 # Task Scheduler – MERN + TypeScript
 
-A task management and scheduling system built using the MERN stack with TypeScript, designed to allocate tasks based on team member availability and workload. The solution is built with scalability in mind — care was taken to structure logic cleanly, manage dependencies responsibly, and define clear types and interfaces for maintainability and future extensibility.
+A task management and scheduling system built using the MERN stack with TypeScript, designed to allocate tasks based on team member availability and workload. The solution is built with scalability in mind for maintainability and future extensibility.
 
 This was implemented using **MongoDB** for storing tasks and members, **Express.js** APIs for business logic, and a **React + TypeScript** frontend with MUI and Tailwind for UI. Form validation is handled using **React Hook Form** and **Yup**.
 
